@@ -1,0 +1,89 @@
+﻿@using Library.Core.Applicantion.ViewModels.Book
+@model SaveBookViewModel
+@{
+    bool isEditing = Model.Id == 0 ? false : true;
+    ViewData["Title"] = "Guardar Libro";
+}
+
+
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+<div id="contact" class="contact-area section-padding">
+
+    <div class="row mb-3 mt-4">
+        <div class="col-3">
+            <a asp-controller="Book" asp-action="Index" class="btn btn-contact-bg h2">Volver</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="section-title text-center mt-5">
+            <h1>@(isEditing ? $"Editando el libro: {Model.Title}" : "Creando un nuevo Libro")</h1>
+        </div>
+        <div class="row">
+            <div class="col-lg-7">
+                <div class="contact">
+                    <form method="post" asp-controller="Book" asp-action="@(isEditing ? "Edit":"Create")" class="form" name="enq">
+
+                        <div class="row">
+
+                            <div class="form-group col-md-12 mb-4">
+                                <input asp-for="Title" type="text" name="Title" class="form-control" placeholder="Nombre del Libro" required>
+                                <span asp-validation-for="Title" class="text-danger"></span>
+
+                            </div>
+                            <div class="form-group col-md-12">
+                                <input asp-for="ISBNCode" type="text" name="ISBNCode" class="form-control" placeholder="Codigo ISBN" required>
+                                <span asp-validation-for="ISBNCode" class="text-danger"></span>
+                            </div>
+
+                            @*                           Aqui va un combobox
+                            *@                            <div class="form-group col-md-12">
+                                <label>Autor PD: Esto tiene que ser un combobox</label>
+                                <input asp-for="AuthorId" type="text" name="AuthorId" class="form-control" placeholder="Autor del libro" required>
+                                <span asp-validation-for="AuthorId" class="text-danger"></span>
+                            </div>
+
+                            @*                           Aqui va un combobox
+                            *@                            <div class="form-group col-md-12">
+                                <label>Genero PD: Esto tiene que ser un combobox</label>
+                                <input asp-for="GenderId" type="text" name="GenderId" class="form-control" placeholder="Genero del libro" required>
+                                <span asp-validation-for="GenderId" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group col-md-12">
+                                <input asp-for="PageNumber" type="text" name="PageNumber" class="form-control" placeholder="Numero de Paginas" required>
+                                <span asp-validation-for="PageNumber" class="text-danger"></span>
+                            </div>
+
+
+                            <div class="form-group col-md-12">
+                                <input asp-for="PublicationYear" type="text" name="PublicationYear" class="form-control" placeholder="Año de Publicacion" required>
+                                <span asp-validation-for="PublicationYear" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group col-md-12">
+                                <input asp-for="ProductCondition" type="text" name="ProductCondition" class="form-control" placeholder="Condicion del Producto" required>
+                                <span asp-validation-for="ProductCondition" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group col-md-12">
+                                <input asp-for="Price" type="text" name="Price" class="form-control" placeholder="Precio" required>
+                                <span asp-validation-for="Price" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-12 text-center">
+                                <button type="submit" value="Send message" name="submit" id="submitButton" class="btn text-primary" title="Guardar">Guardar</button>
+                            </div>
+                        </div>
+                        <input type="hidden" asp-for="Id" />
+
+
+                    </form>
+                </div>
+            </div><!--- END COL -->
+
+        </div><!--- END ROW -->
+    </div><!--- END CONTAINER -->
+</div>

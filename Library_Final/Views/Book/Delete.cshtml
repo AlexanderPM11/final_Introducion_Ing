@@ -1,0 +1,29 @@
+﻿@using Library.Core.Applicantion.ViewModels.Book
+@model SaveBookViewModel
+@{
+    ViewData["Title"] = "Eliminar Tipo de Venta";
+}
+
+<div class="row">
+
+    <div class="col-6 offset-3">
+        <div class="card">
+            <div class="card-header bg-danger text-light">
+                <h4>Esta seguro que desea eliminar el libro @Model.Title? </h4>
+            </div>
+            <div class="card-body">
+
+                <form method="post" asp-controller="Book" asp-action="DeletePost">
+
+                    <input type="hidden" asp-for="Id" />
+
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                    <a asp-controller="Book" asp-action="Index" class="btn btn-warning">Cancelar</a>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</div>

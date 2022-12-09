@@ -1,0 +1,29 @@
+﻿
+@using Library.Core.Applicantion.ViewModels.Gender
+@model SaveGenderViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<div class="container">
+    <div class="row>
+        <div class="col-sm-6">
+
+            <form method="post" asp-action="Create" asp-controller="Home">
+                <div class="mb-3">
+                    <label asp-for="Description" placeholder="asignatura" class="form-label">Description</label>
+                    <input asp-for="Description" class="form-control">
+                </div>
+               
+                <div class="btn-group">
+                    <input type="submit"  class="btn btn-outline-primary" value="Enviar" />
+                    <input type="button" class="btn btn-outline-danger" value="Cancelar" />
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+
+</div>

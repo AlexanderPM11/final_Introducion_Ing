@@ -13,11 +13,11 @@ namespace Library.Core.Applicantion.ViewModels.Book
         public string ISBNCode { get; set; }
         public int AuthorId { get; set; }
         public int GenderId { get; set; }
-        public string PageNumber { get; set; }
+        public int PageNumber { get; set; }
         public bool IsOnlineAvailable { get; set; }
         public string PublicationYear { get; set; }
         public string ProductCondition { get; set; }
-        public string Price { get; set; }
+        public decimal Price { get; set; }
     }
     
 }

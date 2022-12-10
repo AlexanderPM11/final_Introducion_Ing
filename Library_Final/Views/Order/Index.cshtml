@@ -1,0 +1,89 @@
+﻿@using Library.Core.Applicantion.ViewModels.OrderDatail
+@model List<OrderDetailViewModel>
+@{ ViewData["Title"] = "Books"; }
+
+<div class="container-fluid">
+
+    
+    <div class="row">
+
+        <div class="col">
+            <h2 class="text-center mb-5 display-4"> Ordenes de compra</h2>
+        </div>
+    </div>
+
+
+
+    <div class="row">
+        @if (Model == null || Model.Count == 0)
+        {
+        <h3>No hay orden de compra</h3> }
+else
+{
+
+<div class="col-12">
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Subtotal</th>
+                <th scope="col">Book</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (OrderDetailViewModel item in Model)
+            {
+                <tr>
+                    <th >@item.Quantity</th>
+                    <td>@item.Subtotal</td>
+                    <td>@item.BookId</td>
+                </tr>
+        }
+
+        </tbody>
+    </table>
+</div>
+        
+        }
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+@section scripts
+{
+    <script>
+
+    function getContentModal(id) {
+        var url = `Order/PartialViewCreate/${id}`;
+
+            $.get(url, function (data) {
+                showModal(data);
+            });
+    }
+    var confirmCreateOrder="";
+    function showModal(content) {
+        confirmCreateOrder  = $.confirm({
+            title: 'Vender libro',
+            content: `${content}`,
+            buttons: {
+                ok: {
+                    isHidden: true,
+                },
+                cancelButton: {
+                    isHidden: true,
+                },
+            }
+        });
+    }   
+    </script>
+}

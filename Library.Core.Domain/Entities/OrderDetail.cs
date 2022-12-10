@@ -9,8 +9,8 @@ namespace Library.Core.Domain.Entities
 {
   public  class OrderDetail: AuditableBaseEntity
     {        
-        public string Quantity { get; set; }
-        public string Subtotal { get; set; }
+        public decimal Quantity { get; set; }
+        public decimal Subtotal { get; set; }
         public int BookId { get; set; }
 
         public Book Book { get; set; }

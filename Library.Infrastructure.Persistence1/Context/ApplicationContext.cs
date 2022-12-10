@@ -16,15 +16,15 @@ namespace Library.Infrastructure.Persistence.Context
         public DbSet<Gender> Genders { get; set; }
         public DbSet<Inventory> Inventory{ get; set; }
 
+        ///Agregar el rateador de cambio para almacenar la fecha de los registro
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             #region Tables
-            modelBuilder.Entity<Book>()
-            .HasOne<OrderDetail>(ord => ord.OrderDetail)
-            .WithOne(book => book.Book)
-            .HasForeignKey<OrderDetail>(book => book.BookId);
-
+            modelBuilder.Entity<OrderDetail>()
+            .HasOne<Book>(ord => ord.Book)
+            .WithMany(book => book.OrderDetails)
+            .HasForeignKey(ord => ord.BookId);
 
 
             modelBuilder.Entity<Book>()
@@ -33,11 +33,17 @@ namespace Library.Infrastructure.Persistence.Context
             .HasForeignKey(p => p.GenderId);
 
 
-
             modelBuilder.Entity<Book>()
-            .HasOne<Inventory>(ord => ord.Inventory)
-            .WithOne(book => book.Book)
-            .HasForeignKey<Inventory>(book => book.BookId);
+            .HasOne(p => p.Author)
+            .WithMany(c => c.Books)
+            .HasForeignKey(p => p.AuthorId);
+
+
+
+            modelBuilder.Entity<Inventory>()
+            .HasOne<Book>(invt => invt.Book)
+            .WithMany(book => book.Inventory)
+            .HasForeignKey(invt => invt.BookId);
 
             #endregion
 

@@ -10,7 +10,6 @@ namespace Library.Core.Applicantion.ViewModels.Author
     {
         public string Fisrtname { get; set; }
         public string Lastname { get; set; }
-        public int BookId { get; set; }
         public int Id { get; set; }
     }
 }

@@ -1,0 +1,98 @@
+﻿
+@using Library.Core.Applicantion.ViewModels.OrderDatail;
+@model SaveOrderDetailViewModel;
+
+<form asp-action="Create" asp-controller="Order" id="formCreateOrder">
+   
+    <div class="mb-3">
+        <label for="Quantity" class="col-form-label">Cantidad:</label>
+        <input type="text" asp-for="Quantity" class="form-control" id="@Model.Quantity">
+        @Html.TextBoxFor(m => m.BookId, new { style = "display: none;" })
+        @Html.ValidationMessageFor(m => m.Quantity, "", new { @class = "text-danger" })
+
+
+    </div>
+    <div class="modal-footer">
+        <div class="btn-group" role="group" aria-label="Basic outlined example">
+            <button type="button" id="btn-Close" class="btn btn-outline-warning" data-bs-dismiss="modal">Close</button>
+            <button type="button" id="btn-CreateOrder" class="btn btn-primary">Guardar</button>
+        </div>
+    </div>
+</form>
+
+
+
+@*// Jquey and Ajax*@
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+<script>
+
+
+    $("#btn-Close").click(function () {
+        /* confirmCreateOrder.close();*/
+        confirmCreateOrder.close();
+    });
+
+    $("#btn-CreateOrder").click(function () {
+        var url = "@Url.Action("Create", "Order")";
+        var form = $("#formCreateOrder").serialize();
+        if (!$('#formCreateOrder').valid()) {
+            return false;
+        }
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: form,
+            success: function (data) {
+                if (data.status) {
+                    confirmCreateOrder.close();
+                    toastr.success(data.Message,  {
+                        "closeButton": true,
+                        "debug": false,
+                        "newestOnTop": false,
+                        "progressBar": false,
+                        "positionClass": "toast-top-right",
+                        "preventDuplicates": false,
+                        "onclick": null,
+                        "showDuration": "2000",
+                        "hideDuration": "1000",
+                        "timeOut": "5000",
+                        "extendedTimeOut": "1000",
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
+                    });
+                }
+                else {
+                    console.log(data.message)
+                    toastr.error(data.message, {
+                        "closeButton": true,
+                        "debug": false,
+                        "newestOnTop": false,
+                        "progressBar": false,
+                        "positionClass": "toast-top-right",
+                        "preventDuplicates": false,
+                        "onclick": null,
+                        "showDuration": "2000",
+                        "hideDuration": "1000",
+                        "timeOut": "5000",
+                        "extendedTimeOut": "1000",
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
+                    });
+                }
+                
+            },
+
+        });
+
+    });
+
+
+
+</script>
+

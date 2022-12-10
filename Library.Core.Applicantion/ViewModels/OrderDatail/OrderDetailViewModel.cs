@@ -8,9 +8,11 @@ namespace Library.Core.Applicantion.ViewModels.OrderDatail
 {
     public class OrderDetailViewModel
     {
-        public string Quantity { get; set; }
-        public string Subtotal { get; set; }
-        public int BookId { get; set; }
+        public int Quantity { get; set; }
+        public decimal Subtotal { get; set; }
         public int Id { get; set; }
+        public int BookId { get; set; }
+        public bool Status { get; set; }
+        public string Message { get; set; }
     }
 }

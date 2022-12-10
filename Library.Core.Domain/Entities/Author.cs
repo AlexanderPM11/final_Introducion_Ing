@@ -10,8 +10,7 @@ namespace Library.Core.Domain.Entities
    public class Author: AuditableBaseEntity
     {    
         public string Fisrtname { get; set; }
-        public string Lastname { get; set; }
-        public int BookId { get; set; }        
+        public string Lastname { get; set; }     
         public ICollection<Book> Books { get; set; }
     }
 }

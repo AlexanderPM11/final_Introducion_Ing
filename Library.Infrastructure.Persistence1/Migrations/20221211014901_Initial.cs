@@ -52,11 +52,11 @@ namespace Library.Infrastructure.Persistence.Migrations
                     ISBNCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     GenderId = table.Column<int>(type: "int", nullable: false),
                     AuthorId = table.Column<int>(type: "int", nullable: false),
-                    PageNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PageNumber = table.Column<int>(type: "int", nullable: false),
                     IsOnlineAvailable = table.Column<bool>(type: "bit", nullable: false),
-                    PublicationYear = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PublicationYear = table.Column<int>(type: "int", nullable: false),
                     ProductCondition = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Price = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Created = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -85,10 +85,9 @@ namespace Library.Infrastructure.Persistence.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<int>(type: "int", nullable: false),
                     BookId = table.Column<int>(type: "int", nullable: false),
-                    StckAvailability = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StckInitialAvailability = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StckAvailability = table.Column<int>(type: "int", nullable: false),
+                    StckInitialAvailability = table.Column<int>(type: "int", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Created = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -111,8 +110,8 @@ namespace Library.Infrastructure.Persistence.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Quantity = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Subtotal = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Quantity = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Subtotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     BookId = table.Column<int>(type: "int", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Created = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -143,14 +142,12 @@ namespace Library.Infrastructure.Persistence.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Inventory_BookId",
                 table: "Inventory",
-                column: "BookId",
-                unique: true);
+                column: "BookId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrderDetails_BookId",
                 table: "OrderDetails",
-                column: "BookId",
-                unique: true);
+                column: "BookId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

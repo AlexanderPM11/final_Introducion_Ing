@@ -51,26 +51,35 @@ namespace Example.Core.Application.Services
                     vm.Message = "La cantidad de libro no puede ser mayor a 200";
                     return (vm);
                 }
-            }
-            // Restar la cantidad de libro disponible en inventario
-            inventory.StckAvailability -= vm.Quantity;
-            // calcular subTotal
-            var book = await _bookRepository.GetByIdAsync(vm.BookId);
-            if (vm.Quantity > 0)
-            {
-                vm.Subtotal = vm.Quantity * book.Price;
+
+                // Restar la cantidad de libro disponible en inventario
+                inventory.StckAvailability -= vm.Quantity;
+                // calcular subTotal
+                var book = await _bookRepository.GetByIdAsync(vm.BookId);
+                if (vm.Quantity > 0)
+                {
+                    vm.Subtotal = vm.Quantity * book.Price;
+                }
+                else
+                {
+                    vm.Subtotal = book.Price;
+                }
+                await _inventory.UpdateAsync(inventory.Id, inventory);
+
+                await base.Add(vm);
+                vm.Status = true;
+                vm.Message = "Libro vendido con exito";
+
+                return vm;
             }
             else
             {
-                vm.Subtotal = book.Price;
-            }
-            await _inventory.UpdateAsync(inventory.Id, inventory);
-            
-            await base.Add(vm);
-            vm.Status = true;
-            vm.Message = "Libro vendido con exito";
+                vm.Status = false;
+                vm.Message = "Este libro ya no esta disponible";
 
-            return vm;
+                return vm;
+            }
+            
         }
 
 

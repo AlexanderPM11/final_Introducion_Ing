@@ -34,6 +34,11 @@ namespace Library.Core.Applicantion.Mappings
             CreateMap<OrderDetail, SaveOrderDetailViewModel>().ReverseMap();
             CreateMap<OrderDetail, OrderDetailViewModel>().ReverseMap();
 
+
+           
+
+
+
         }
 
     }

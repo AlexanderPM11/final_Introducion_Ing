@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Library.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20221209235458_Initial")]
+    [Migration("20221211014901_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -82,17 +82,17 @@ namespace Library.Infrastructure.Persistence.Migrations
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PageNumber")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("PageNumber")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Price")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("ProductCondition")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PublicationYear")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("PublicationYear")
+                        .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
@@ -155,19 +155,15 @@ namespace Library.Infrastructure.Persistence.Migrations
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("StckAvailability")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("StckAvailability")
+                        .HasColumnType("int");
 
-                    b.Property<string>("StckInitialAvailability")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Title")
+                    b.Property<int>("StckInitialAvailability")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BookId")
-                        .IsUnique();
+                    b.HasIndex("BookId");
 
                     b.ToTable("Inventory");
                 });
@@ -194,16 +190,15 @@ namespace Library.Infrastructure.Persistence.Migrations
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Quantity")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<decimal>("Quantity")
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("Subtotal")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<decimal>("Subtotal")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BookId")
-                        .IsUnique();
+                    b.HasIndex("BookId");
 
                     b.ToTable("OrderDetails");
                 });
@@ -230,8 +225,8 @@ namespace Library.Infrastructure.Persistence.Migrations
             modelBuilder.Entity("Library.Core.Domain.Entities.Inventory", b =>
                 {
                     b.HasOne("Library.Core.Domain.Entities.Book", "Book")
-                        .WithOne("Inventory")
-                        .HasForeignKey("Library.Core.Domain.Entities.Inventory", "BookId")
+                        .WithMany("Inventory")
+                        .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -241,8 +236,8 @@ namespace Library.Infrastructure.Persistence.Migrations
             modelBuilder.Entity("Library.Core.Domain.Entities.OrderDetail", b =>
                 {
                     b.HasOne("Library.Core.Domain.Entities.Book", "Book")
-                        .WithOne("OrderDetail")
-                        .HasForeignKey("Library.Core.Domain.Entities.OrderDetail", "BookId")
+                        .WithMany("OrderDetails")
+                        .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -258,7 +253,7 @@ namespace Library.Infrastructure.Persistence.Migrations
                 {
                     b.Navigation("Inventory");
 
-                    b.Navigation("OrderDetail");
+                    b.Navigation("OrderDetails");
                 });
 
             modelBuilder.Entity("Library.Core.Domain.Entities.Gender", b =>

@@ -11,6 +11,6 @@ namespace Example.Core.Application.Interfaces.Repositories
    public interface IInventoryRepository : IGenericRepository<Inventory>
    {
 
-    
+        Task<Inventory> GetByBookIdAsync(int bookId);
    }
 }

@@ -14,5 +14,6 @@ namespace Library.Core.Domain.Entities
         public int BookId { get; set; }
 
         public Book Book { get; set; }
+
     }
 }

@@ -15,15 +15,15 @@ namespace Library.Core.Domain.Entities
         public int AuthorId { get; set; }
         public int PageNumber { get; set; }
         public bool IsOnlineAvailable { get; set; }
-        public string PublicationYear { get; set; }
+        public int PublicationYear { get; set; }
         public string ProductCondition { get; set; }
-        public decimal Price { get; set; }
+        public double Price { get; set; }
 
         ///
-        public ICollection<OrderDetail>  OrderDetails { get; set; }
+        public OrderDetail OrderDetail { get; set; }
         public Author Author { get; set; }
         public Gender Gender { get; set; }
-        public ICollection<Inventory>  Inventory { get; set; }
+        public Inventory Inventory { get; set; }
 
 
     }

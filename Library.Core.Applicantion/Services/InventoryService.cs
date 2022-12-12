@@ -20,6 +20,6 @@ namespace Example.Core.Application.Services
         {
             _inventoryRepository = inventoryRepository;
             _mapper = mapper;
-        }       
+        }
     }
 }

@@ -29,7 +29,7 @@ namespace Example.Core.Application.Services
         public async override Task<SaveOrderDetailViewModel> Add(SaveOrderDetailViewModel vm)
         {
             
-            Inventory inventory = await _inventory.GetByIdAsync(vm.BookId);
+            Inventory inventory = await _inventory.GetByBookIdAsync(vm.BookId);
             if (inventory != null)
             {
                 int countBookInInventory = inventory.StckAvailability;

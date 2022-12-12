@@ -15,7 +15,7 @@ namespace Library.Core.Domain.Entities
         public int AuthorId { get; set; }
         public int PageNumber { get; set; }
         public bool IsOnlineAvailable { get; set; }
-        public string PublicationYear { get; set; }
+        public int PublicationYear { get; set; }
         public string ProductCondition { get; set; }
         public decimal Price { get; set; }
 

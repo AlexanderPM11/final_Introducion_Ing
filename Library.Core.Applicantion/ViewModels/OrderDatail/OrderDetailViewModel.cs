@@ -14,5 +14,6 @@ namespace Library.Core.Applicantion.ViewModels.OrderDatail
         public int BookId { get; set; }
         public bool Status { get; set; }
         public string Message { get; set; }
+        public DateTime Created { get; set; }
     }
 }

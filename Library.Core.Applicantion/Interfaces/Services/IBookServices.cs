@@ -12,6 +12,6 @@ namespace Example.Core.Application.Interfaces.Services
 {
     public  interface IInventoryServices : IGenericService<SaveInventoryViewModel, InventoryViewModel, Inventory>
     {
-
+         
     }
 }
